@@ -25,4 +25,12 @@ public class SortTest {
         integerInsertSort.sort(actual);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void selectionSortTesting() {
+        SelectionSort<Integer> integerSelectionSort = new SelectionSort<>();
+        List<Integer> actual = new ArrayList<>(Arrays.stream(elements).toList());
+        integerSelectionSort.sort(actual);
+        assertEquals(expected, actual);
+    }
 }

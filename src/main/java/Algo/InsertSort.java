@@ -10,7 +10,7 @@ public class InsertSort<T extends Comparable<T>> implements Sorting<T> {
 			T point = elements.get(i);
 			int j = i;
 
-			while (j > 0 && large(elements.get(j - 1), point)) {
+			while (j > 0 && larger(elements.get(j - 1), point)) {
 				elements.set(j, elements.get(j - 1));
 				j--;
 			}
@@ -18,7 +18,7 @@ public class InsertSort<T extends Comparable<T>> implements Sorting<T> {
 		}
 	}
 
-	private boolean large(T k1, T k2) {
+	private boolean larger(T k1, T k2) {
 		return k1.compareTo(k2) > 0;
 	}
 }
