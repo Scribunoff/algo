@@ -1,48 +1,57 @@
 package Algo;
 
-public class QuickSort {
-	
-	public static void quicksort(int[] arr) {
+import java.util.List;
+
+public class QuickSort<T extends Comparable<T>> implements Sorting<T> {
+	@Override
+	public void sort(List<T> elements) {
 		int low = 0;
-		int high = arr.length - 1;
-		sort(arr, low, high);
+		int high = elements.size() - 1;
+		sort(elements, low, high);
 	}
 
-	private static void sort(int[] array, int low, int high) {
+	private void sort(List<T> elements, int low, int high) {
 		if (low > high) {
 			return;
 		}
 		int left = low;
 		int right = high;
-		int middle = (left + right)/2;
-		
+		int middle = (left + right) / 2;
+
 		while (low <= high) {
-			if (array[low] <= array[middle]) {
+			if (!larger(elements.get(low), elements.get(middle))) {
 				if (low > middle) {
-					int temp = array[low];
-					array[low] = array[middle];
-					array[middle] = temp;
+					T temp = elements.get(low);
+					elements.set(low, elements.get(middle));
+					elements.set(middle, temp);
 					middle = low;
 				}
 				low++;
-			} else if (array[high] >= array[middle]) {
-				if (high < middle) {
-					int temp = array[high];
-					array[high] = array[middle];
-					array[middle] = temp;
+				//elements.get(high) >= elements.get(middle)
+			} else if (!larger(elements.get(middle), elements.get(high))) {
+				if (middle > high) {
+					T temp = elements.get(high);
+					elements.set(high, elements.get(middle));
+					elements.set(middle, temp);
 					middle = high;
 				}
 				high--;
 			} else {
-				int temp = array[low];
-				array[low] = array[high];
-				array[high] = temp;
-			low++;
-			high--;
+				T temp = elements.get(low);
+				elements.set(low, elements.get(high));
+				elements.set(high, temp);
+				low++;
+				high--;
 			}
 		}
-		sort(array, left, middle-1);
-		sort(array, middle + 1, right);
+		sort(elements, left, middle - 1);
+		sort(elements, middle + 1, right);
 	}
+
+	private boolean larger(T k1, T k2) {
+		return k1.compareTo(k2) > 0;
+	}
+
+
 }
 

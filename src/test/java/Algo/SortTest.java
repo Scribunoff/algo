@@ -12,9 +12,9 @@ public class SortTest {
     List<Integer> expected = Stream.of(elements).sorted().toList();
     @Test
     public void bubbleSortTesting() {
-        BubbleSort<Integer> bubbleSort = new BubbleSort<>();
+        BubbleSort<Integer> integerBubbleSort = new BubbleSort<>();
         List<Integer> actual = new ArrayList<>(Arrays.stream(elements).toList());
-        bubbleSort.sort(actual);
+        integerBubbleSort.sort(actual);
         assertEquals(expected, actual);
     }
 
@@ -31,6 +31,14 @@ public class SortTest {
         SelectionSort<Integer> integerSelectionSort = new SelectionSort<>();
         List<Integer> actual = new ArrayList<>(Arrays.stream(elements).toList());
         integerSelectionSort.sort(actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void quickSortTesting() {
+        QuickSort<Integer> integerQuickSort = new QuickSort<>();
+        List<Integer> actual = new ArrayList<>(Arrays.stream(elements).toList());
+        integerQuickSort.sort(actual);
         assertEquals(expected, actual);
     }
 }
