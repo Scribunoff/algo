@@ -1,4 +1,4 @@
-package org.Algo;
+package Algo;
 
 public class QuickSort {
 	

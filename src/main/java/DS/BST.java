@@ -1,4 +1,4 @@
-package org.DataStr;
+package DS;
 
 import java.util.Collections;
 import java.util.LinkedList;

@@ -1,11 +1,5 @@
-package org.Algo;
+package Algo;
 
-import Algo.BubbleSort;
-import Algo.InsertSort;
-import Algo.MergeSort;
-import Algo.QuickSort;
-import Algo.SelectionSort;
-import Algo.HeapSort;
 import java.util.Scanner;
 import java.util.Random;
 

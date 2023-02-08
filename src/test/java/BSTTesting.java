@@ -1,5 +1,5 @@
-import org.DataStr.BST;
-import org.DataStr.Type;
+import DS.BST;
+import DS.Type;
 import org.junit.Test;
 
 import java.util.ArrayList;

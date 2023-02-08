@@ -1,4 +1,4 @@
-package org.Algo;
+package Algo;
 
 public class InsertSort {
 	public static void insertsort(int[] array) {
