@@ -1,5 +1,4 @@
 import DS.BST;
-import DS.Type;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -18,28 +17,28 @@ public class BSTTesting {
     @Test
     public void inOrderTesting() {
         List<Integer> expected = new ArrayList<Integer>(List.of(new Integer[]{3, 5, 6, 7, 8, 9, 11}));
-        List<Integer> actual = bst.traversal(Type.IN_ORDER);
+        List<Integer> actual = bst.traversal(BST.Type.IN_ORDER);
         assertEquals(expected, actual);
     }
 
     @Test
     public void preOrderTesting() {
         List<Integer> expected = new ArrayList<Integer>(List.of(new Integer[]{7,5,3,6,9,8,11}));
-        List<Integer> actual = bst.traversal(Type.PRE_ORDER);
+        List<Integer> actual = bst.traversal(BST.Type.PRE_ORDER);
         assertEquals(expected, actual);
     }
 
     @Test
     public void postOrderTesting() {
         List<Integer> expected = new ArrayList<Integer>(List.of(new Integer[]{3,6,5,8,11,9,7}));
-        List<Integer> actual = bst.traversal(Type.POST_ORDER);
+        List<Integer> actual = bst.traversal(BST.Type.POST_ORDER);
         assertEquals(expected, actual);
     }
 
     @Test
     public void levelOrderTesting() {
         List<Integer> expected = new ArrayList<Integer>(List.of(new Integer[]{7,5,9,3,6,8,11}));
-        List<Integer> actual = bst.traversal(Type.LEVEL_ORDER);
+        List<Integer> actual = bst.traversal(BST.Type.LEVEL_ORDER);
         assertEquals(expected, actual);
     }
 }
