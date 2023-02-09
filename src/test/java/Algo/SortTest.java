@@ -41,4 +41,12 @@ public class SortTest {
         integerQuickSort.sort(actual);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void mergeSortTesting() {
+        MergeSort<Integer> integerMergeSort = new MergeSort<>();
+        List<Integer> actual = new ArrayList<>(Arrays.stream(elements).toList());
+        integerMergeSort.sort(actual);
+        assertEquals(expected, actual);
+    }
 }

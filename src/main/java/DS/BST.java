@@ -21,8 +21,8 @@ public class BST<T extends Comparable<T>> {
     public BST() {
     }
 
-    private boolean less(T k1, T k2) {
-        return k1.compareTo(k2) <= 0;
+    private boolean less(T first, T second) {
+        return first.compareTo(second) <= 0;
     }
 
     public Node<T> find(T val) {

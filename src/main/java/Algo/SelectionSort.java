@@ -6,6 +6,14 @@ public class SelectionSort<T extends Comparable<T>> implements Sorting<T> {
 
 	@Override
 	public void sort(List<T> elements) {
+		if (elements == null) {
+			throw new IllegalArgumentException("Array mustn't be null");
+		}
+
+		if (elements.size() < 2) {
+			return;
+		}
+
 		for (int i = 0 ; i < elements.size() - 1; i++) {
 			int min = i;
 			for (int j = i + 1 ; j < elements.size(); j++) {
@@ -13,13 +21,7 @@ public class SelectionSort<T extends Comparable<T>> implements Sorting<T> {
 					min = j;
 				}
 			}
-			T temp = elements.get(min);
-			elements.set(min, elements.get(i));
-			elements.set(i, temp);
+			swap(elements, min, i);
 		}
-	}
-
-	private boolean less(T k1, T k2) {
-		return k1.compareTo(k2) < 0;
 	}
 }

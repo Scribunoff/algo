@@ -1,48 +1,56 @@
 package Algo;
 
-public class MergeSort {
-	
-	public static void mergesort(int[] array) {
-		if (array.length < 2) {
-				return;
-			}
-			
-			int middle = array.length / 2 ;
-			int[] left = new int[middle];
-			int[] right = new int[array.length - middle];
-			
-			for (int i = 0; i < middle; i++) {
-				left[i] = array[i];
-			}
-			
-			for (int i = 0; i < array.length - middle; i++) {
-				right[i] = array[i + middle];
-			}
-			
-			mergesort(left);
-			mergesort(right);
-			merge(array, left, right);
+import java.util.ArrayList;
+import java.util.List;
+
+public class MergeSort<T extends Comparable<T>> implements Sorting<T>{
+	private List<T> buffer;
+	@Override
+	public void sort(List<T> elements) {
+		if (elements == null) {
+			throw new IllegalArgumentException("Array mustn't be null");
+		}
+
+		if (elements.size() < 2) {return;}
+
+		this.buffer = new ArrayList<>(elements.size());
+		sort(elements, 0, elements.size() - 1);
+		this.buffer = null;
 	}
-	
-	public static void merge (int[] array, int[] left, int[] right) {
-		int i = 0;
-		int j = 0;
-		int ind = 0;
-		
-		while (i < left.length && j < right.length) {
-			if (left[i] < right[j]) {
-				array[ind++] = left[i++];
+
+	private void sort(List<T> elements, int min, int max) {
+		if (min == max) {return;}
+
+		int mid = (min + max) >> 1;
+
+		sort(elements, min, mid);
+		sort(elements, mid + 1, max);
+
+		merge(elements, min, mid, max);
+	}
+
+	private void merge(List<T> elements, int min, int mid, int max) {
+		if (lessOrEquals(elements.get(mid), elements.get(mid + 1))) {
+			return;
+		}
+
+		for (int k = min; k <= max; k++) {
+			this.buffer.add(k, elements.get(k));
+		}
+
+		int left = min;
+		int right = mid + 1;
+
+		for (int k = min; k <= max; k++) {
+			if (left > mid) {
+				elements.set(k, this.buffer.get(right++));
+			} else if (right > max) {
+				elements.set(k, this.buffer.get(left++));
+			} else if (less(this.buffer.get(left), this.buffer.get(right))) {
+				elements.set(k, this.buffer.get(left++));
 			} else {
-				array[ind++] = right[j++];
+				elements.set(k, this.buffer.get(right++));
 			}
-		}
-		
-		for (int left_index = i; left_index < left.length; left_index++) {
-			array[ind++] = left[left_index];
-		}
-		
-		for (int right_index = j; right_index < right.length; right_index++) {
-			array[ind++] = right[right_index];
 		}
 	}
 }

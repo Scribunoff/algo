@@ -2,56 +2,44 @@ package Algo;
 
 import java.util.List;
 
-public class QuickSort<T extends Comparable<T>> implements Sorting<T> {
-	@Override
-	public void sort(List<T> elements) {
-		int low = 0;
-		int high = elements.size() - 1;
-		sort(elements, low, high);
-	}
+public class QuickSort<T extends Comparable<T>> implements Sorting<T>{
 
-	private void sort(List<T> elements, int low, int high) {
-		if (low > high) {
-			return;
-		}
-		int left = low;
-		int right = high;
-		int middle = (left + right) / 2;
+    @Override
+    public void sort(List<T> elements) {
+        if (elements == null) {
+            throw new IllegalArgumentException("Array mustn't be null");
+        }
 
-		while (low <= high) {
-			if (!larger(elements.get(low), elements.get(middle))) {
-				if (low > middle) {
-					T temp = elements.get(low);
-					elements.set(low, elements.get(middle));
-					elements.set(middle, temp);
-					middle = low;
-				}
-				low++;
-				//elements.get(high) >= elements.get(middle)
-			} else if (!larger(elements.get(middle), elements.get(high))) {
-				if (middle > high) {
-					T temp = elements.get(high);
-					elements.set(high, elements.get(middle));
-					elements.set(middle, temp);
-					middle = high;
-				}
-				high--;
-			} else {
-				T temp = elements.get(low);
-				elements.set(low, elements.get(high));
-				elements.set(high, temp);
-				low++;
-				high--;
-			}
-		}
-		sort(elements, left, middle - 1);
-		sort(elements, middle + 1, right);
-	}
+        if (elements.size() < 2) {
+            return;
+        }
 
-	private boolean larger(T k1, T k2) {
-		return k1.compareTo(k2) > 0;
-	}
+        sort(elements, 0, elements.size() - 1);
+    }
 
+    private void sort(List<T> elements, int start, int end) {
+        if (end > start) {
+            int pivotIndex = partition(elements, start, end);
+            sort(elements, start, pivotIndex - 1);
+            sort(elements, pivotIndex + 1, end);
+        }
+    }
+
+    private int partition(List<T> elements, int start, int end) {
+        T pivot = elements.get(end);
+        int i = start - 1;
+        for (int j = start ; j < end; j++) {
+            if (less(elements.get(j), pivot)) {
+                i++;
+                if (less(elements.get(j), elements.get(i))) {
+                    swap(elements, i, j);
+                }
+            }
+        }
+        i++;
+        //end - index of pivot
+        swap(elements, i, end);
+        return i;
+    }
 
 }
-
